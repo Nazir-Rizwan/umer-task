@@ -1,0 +1,36 @@
+[
+    {
+        "icon": "📄",
+        "title": "On-Page SEO Services",
+        "description": "Optimize Your Website for Higher Rankings, Better Traffic & More Conversions. Build a strong foundation for long-term search engine success.",
+        "list": [
+            "Keyword Research & Search Intent Analysis",
+            "Content Optimization & Structure",
+            "Title Tags & Meta Descriptions",
+            "Internal Linking Strategy"
+        ]
+    },
+    {
+        "icon": "🔄",
+        "title": "Off-Page SEO Services",
+        "description": "Build Authority, Boost Rankings & Strengthen Your Online Presence. Improve your website's authority and trustworthiness across the web.",
+        "list": [
+            "Quality Backlink Acquisition",
+            "Brand Mentions & Online Reputation",
+            "Competitor Backlink Analysis",
+            "Long-Term Link Profile Growth"
+        ]
+    },
+    
+    {
+        "icon": "🔄",
+        "title": "Off-Page SEO Services",
+        "description": "Build Authority, Boost Rankings & Strengthen Your Online Presence. Improve your website's authority and trustworthiness across the web.",
+        "list": [
+            "Quality Backlink Acquisition",
+            "Brand Mentions & Online Reputation",
+            "Competitor Backlink Analysis",
+            "Long-Term Link Profile Growth"
+        ]
+    }
+]
