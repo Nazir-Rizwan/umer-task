@@ -3,6 +3,9 @@ import Anchor from 'lucide-react/dist/esm/icons/anchor';
 import { Target, TrendingUp, Users, BarChart, Award } from 'lucide-react';
 import { CheckCircle, Search, Link2, FileText, Globe, MapPin } from 'lucide-react';
 import { Rocket, BarChart3 } from 'lucide-react';
+import { WhyChooseUs } from '@/components/WhyChooseUs';
+import { VisionSection } from '@/components/VisionSection';
+import { CTASection } from '@/components/common/CTASection';
 const page = () => {
     // mission section 
     const goals = [
@@ -218,6 +221,20 @@ const page = () => {
                     </div>
                 </div>
             </section>
+            <WhyChooseUs />
+            <VisionSection />
+            <CTASection
+                title="📞 Ready to Grow Your Business?"
+                description="Turn your website into a traffic and lead-generating machine."
+                primaryButton={{
+                    text: "Request a Free SEO Audit",
+                    to: "/contact"
+                }}
+                secondaryButton={{
+                    text: "Talk to an SEO Expert Today",
+                    to: "/contact"
+                }}
+            />
         </div>
     )
 }

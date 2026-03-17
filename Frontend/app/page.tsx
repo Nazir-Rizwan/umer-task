@@ -7,6 +7,7 @@ import SectionHeader from "@/components/common/SectionHeader";
 import { ContainerSection } from "@/layout/ContainerSection";
 import { Lightbulb } from 'lucide-react';
 import { benefits, services, reasons, steps, clients } from "@/data/homeData";
+import { CTASection } from '@/components/common/CTASection';
 
 export default function Home() {
   return (
@@ -182,6 +183,19 @@ export default function Home() {
         </div>
       </ContainerSection>
 
+      {/* Final CTA */}
+      <CTASection
+        title="📞 Ready to Grow Your Business?"
+        description="Turn your website into a traffic and lead-generating machine."
+        primaryButton={{
+          text: "Request a Free SEO Audit",
+          to: "/contact"
+        }}
+        secondaryButton={{
+          text: "Talk to an SEO Expert Today",
+          to: "/contact"
+        }}
+      />
     </>
   );
 }
