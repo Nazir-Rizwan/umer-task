@@ -7,9 +7,9 @@ export class AppService {
     return 'Hello World!';
   }
 
-  async createUser(name: string, email: string) {
-    return this.prisma.user.create({
-      data: { name, email },
-    });
-  }
+  // async createUser(name: string, email: string) {
+  //   return this.prisma.user.create({
+  //     data: { name, email },
+  //   });
+  // }
 }

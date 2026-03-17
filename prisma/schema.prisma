@@ -13,10 +13,69 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+}
 
-model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  email     String  @unique
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Admin {
+  id       Int     @id @default(autoincrement())
+  name     String?
+  email    String  @unique
+  password String
+  role     Role    @default(ADMIN)
+  blogs    Blog[] // one admin can write many blogs
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+model Blog {
+  id              Int        @id @default(autoincrement())
+  title           String
+  slug            String     @unique // e.g. "my-first-blog-post"
+  excerpt         String
+  content         String?
+  coverImageUrl   String? // image URL
+  readTimeMinutes Int        @default(0)
+  status          BlogStatus @default(DRAFT)
+  publishedAt     DateTime? // set when status → PUBLISHED
+
+  adminId Int
+  admin   Admin @relation(fields: [adminId], references: [id])
+
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  blogCategories BlogCategory[]
+
+  @@map("blogs")
+}
+
+// ─── BlogCategory (join table) ───────────────────────────
+
+model BlogCategory {
+  blogId     Int
+  categoryId Int
+
+  blog     Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([blogId, categoryId]) // composite PK — no duplicate pairs
+  @@map("blog_categories")
+}
+
+model Category {
+  id        Int            @id @default(autoincrement())
+  name      String         @unique // "SEO", "Digital Marketing"
+  createdAt DateTime       @default(now())
+  blogs     BlogCategory[]
+
+  @@map("categories")
 }
