@@ -2,7 +2,7 @@ import { FileEdit, CheckCircle2, TrendingUp, XCircle } from 'lucide-react';
 import { ServiceDetailHero } from '@/components/common/ServiceDetailHero';
 import Link from "next/link";
 
-export function GuestPosting() {
+export default function GuestPosting() {
     const niches = [
         "Technology & Software",
         "Business & Finance",

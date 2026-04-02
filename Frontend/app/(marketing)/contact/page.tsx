@@ -1,6 +1,7 @@
 import HeroSection from "@/components/common/HeroSection";
+import { ContactInfo } from "@/components/ContactInfo";
 // import StatsSection from "@/components/about/StatsSection";
-
+import { WorkingHours } from "@/components/WorkingHours";
 
 export default function ContactPage() {
     return (
@@ -15,9 +16,10 @@ export default function ContactPage() {
             />
 
             {/* <StatsSection /> */}
+            <ContactInfo />
 
             {/* Mission section */}
-
+            <WorkingHours />
         </>
     );
 }
