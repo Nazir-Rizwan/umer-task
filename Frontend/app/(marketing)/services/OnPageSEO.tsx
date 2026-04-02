@@ -92,7 +92,7 @@ export function OnPageSEO() {
                 title="On-Page SEO Services"
                 subtitle="Optimize Your Website for Higher Rankings, Better Traffic & More Conversions"
                 description="At Link Harbor SEO, our On-Page SEO services are designed to build a strong foundation for long-term search engine success. We optimize every critical element of your website to ensure search engines can easily understand your content — and users stay engaged and convert. On-Page SEO is not just about keywords. It's about relevance, structure, user experience, and performance."
-                gradient="from-blue-600 via-blue-700 to-indigo-800"
+                variant="services"
             />
 
             {/* What is On-Page SEO */}

@@ -1,4 +1,3 @@
-import React, { use } from 'react'
 import HeroSection from "@/components/common/HeroSection";
 import { services } from '@/data/services';
 import { notFound } from "next/navigation";
@@ -8,10 +7,9 @@ interface Props {
 }
 
 const page = async ({ params }: Props) => {
-    const { slug } = await params
-    console.log("params.slug", slug)
-    const service = services.find((s) => s.slug === slug);
-    // console.log("Service found:", service); // Debug log to check if service is found
+    const { slug } = await params;
+    const service = services.find((s) => s.link.endsWith(`/${slug}`));
+
     if (!service) {
         notFound();
     }
@@ -31,10 +29,10 @@ const page = async ({ params }: Props) => {
                         {service.description}
                     </p>
                 </div>
-            </section>itle="Complete SEO & Digital Marketing Solutions to Grow Your Business"
+            </section>
 
         </>
-    )
-}
+    );
+};
 
-export default page
+export default page;
