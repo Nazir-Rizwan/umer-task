@@ -2,7 +2,7 @@ import { TrendingUp, CheckCircle2 } from 'lucide-react';
 import { ServiceDetailHero } from '@/components/common/ServiceDetailHero';
 import Link from "next/link";
 
-export function DigitalMarketing() {
+export default function DigitalMarketing() {
     const services = [
         {
             title: "Search Engine Optimization (SEO) Integration",

@@ -3,6 +3,9 @@ import Anchor from 'lucide-react/dist/esm/icons/anchor';
 import { Target, TrendingUp, Users, BarChart, Award } from 'lucide-react';
 import { CheckCircle, Search, Link2, FileText, Globe, MapPin } from 'lucide-react';
 import { Rocket, BarChart3 } from 'lucide-react';
+import { WhyChooseUs } from '@/components/WhyChooseUs';
+import { VisionSection } from '@/components/VisionSection';
+import { CTASection } from '@/components/common/CTASection';
 const page = () => {
     // mission section 
     const goals = [
@@ -102,23 +105,34 @@ const page = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                        {goals.map((goal, index) => {
-                            const Icon = goal.icon;
-                            return (
-                                <div
-                                    key={index}
-                                    className="flex items-start gap-4 p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 hover:shadow-lg transition-shadow"
-                                >
-                                    <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                                        <Icon className="w-6 h-6 text-white" />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-12 items-center">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {goals.map((goal, index) => {
+                                const Icon = goal.icon;
+                                return (
+                                    <div key={index}
+                                        className="flex items-start gap-4 p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 hover:shadow-lg transition-shadow">
+                                        <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                                            <Icon className="w-6 h-6 text-white" />
+                                        </div>
+                                        <p className="text-base text-gray-800 mt-2">{goal.text}</p>
                                     </div>
-                                    <div className="flex-1">
-                                        <p className="text-lg text-gray-800">{goal.text}</p>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
+                        {/* Upward growth — digital success */}
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img
+                                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+                                alt="Team achieving upward growth"
+                                className="w-full h-72 object-cover object-top"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent" />
+                            <div className="absolute bottom-4 left-4 text-white">
+                                <p className="font-bold text-lg">Measurable Results</p>
+                                <p className="text-sm text-white/80">Data-driven growth for every client</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -156,12 +170,12 @@ const page = () => {
                         </div>
 
                         <div className="relative">
-                            <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                                {/* <ImageWithFallback
-                                    src="https://images.unsplash.com/photo-1758873271824-a3216c80d1ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwdGVhbSUyMGNvbGxhYm9yYXRpb258ZW58MXx8fHwxNzcxMzg5NDc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                    alt="Digital Marketing Team"
-                                    className="w-full h-full object-cover"
-                                /> */}
+                            <div className="rounded-2xl overflow-hidden shadow-2xl">
+                                <img
+                                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80"
+                                    alt="Our SEO team collaborating"
+                                    className="w-full h-96 object-cover"
+                                />
                             </div>
                             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-blue-600 rounded-2xl -z-10"></div>
                             <div className="absolute -top-6 -left-6 w-48 h-48 bg-indigo-600 rounded-2xl -z-10"></div>
@@ -218,6 +232,20 @@ const page = () => {
                     </div>
                 </div>
             </section>
+            <WhyChooseUs />
+            <VisionSection />
+            <CTASection
+                title="📞 Ready to Grow Your Business?"
+                description="Turn your website into a traffic and lead-generating machine."
+                primaryButton={{
+                    text: "Request a Free SEO Audit",
+                    to: "/contact"
+                }}
+                secondaryButton={{
+                    text: "Talk to an SEO Expert Today",
+                    to: "/contact"
+                }}
+            />
         </div>
     )
 }

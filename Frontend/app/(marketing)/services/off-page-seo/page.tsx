@@ -2,7 +2,7 @@ import { Link2, CheckCircle2, TrendingUp } from 'lucide-react';
 import { ServiceDetailHero } from '@/components/common/ServiceDetailHero';
 import Link from "next/link";
 
-export function OffPageSEO() {
+export default function OffPageSEO() {
     const services = [
         {
             title: "Quality Backlink Acquisition",
