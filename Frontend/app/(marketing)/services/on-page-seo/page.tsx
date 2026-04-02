@@ -2,7 +2,7 @@ import { FileSearch, CheckCircle2, TrendingUp } from 'lucide-react';
 import { ServiceDetailHero } from '@/components/common/ServiceDetailHero';
 import Link from "next/link";
 
-export function OnPageSEO() {
+export default function OnPageSEO() {
     const processSteps = [
         {
             title: "Keyword Research & Search Intent Analysis",
