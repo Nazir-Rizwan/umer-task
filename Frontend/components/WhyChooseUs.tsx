@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 
 export function WhyChooseUs() {
@@ -15,15 +14,17 @@ export function WhyChooseUs() {
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="order-2 lg:order-1">
-                        <div className="relative">
-                            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                                {/* <Image
-                                    src="https://images.unsplash.com/photo-1686061594225-3e92c0cd51b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxTRU8lMjBzdHJhdGVneSUyMGFuYWx5dGljc3xlbnwxfHx8fDE3NzE0NDI1NjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                                    alt="SEO Strategy"
-                                    className="w-full h-full object-cover"
-                                /> */}
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img
+                                src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&q=80"
+                                alt="Professional SEO team delivering results"
+                                className="w-full h-80 object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/50 to-transparent" />
+                            <div className="absolute bottom-4 left-4 text-white">
+                                <p className="text-2xl font-bold">Proven Expertise</p>
+                                <p className="text-sm text-white/80">Trusted by 100+ businesses worldwide</p>
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent rounded-2xl"></div>
                         </div>
                     </div>
 

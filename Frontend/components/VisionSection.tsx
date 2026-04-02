@@ -1,4 +1,3 @@
-import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Eye, Sparkles } from 'lucide-react';
 
 export function VisionSection() {
@@ -45,11 +44,14 @@ export function VisionSection() {
 
                     <div className="relative">
                         <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                            {/* <ImageWithFallback
-                src="https://images.unsplash.com/photo-1630344745908-ed5ffd73199a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMGdyb3d0aCUyMHN1Y2Nlc3N8ZW58MXx8fHwxNzcxNDQyNTYxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Business Growth"
-                className="w-full h-full object-cover"
-              /> */}
+                            <img
+                                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
+                                alt="Vision — business growth analytics"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="absolute -bottom-4 -left-4 bg-gradient-to-br from-blue-600 to-indigo-600 text-white px-5 py-3 rounded-xl shadow-lg font-semibold text-sm">
+                            🚀 Future-Ready Strategy
                         </div>
                     </div>
                 </div>
