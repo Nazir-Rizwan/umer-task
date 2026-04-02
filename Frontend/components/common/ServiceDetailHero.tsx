@@ -1,4 +1,5 @@
 import { LucideIcon } from 'lucide-react';
+import Link from 'next/link';
 import HeroSection from './HeroSection';
 import { Button } from '@/components/ui/button';
 import { GradientVariant } from '@/types/index';
@@ -21,8 +22,10 @@ export function ServiceDetailHero({ icon: Icon, title, subtitle, description, va
             description={description}
         >
             <div className="text-center">
-                <Button variant="secondary" size="lg" to="/contact" showArrow>
-                    Get Started Today
+                <Button variant="secondary" size="lg" asChild>
+                    <Link href="/contact">
+                        Get Started Today
+                    </Link>
                 </Button>
             </div>
         </HeroSection>

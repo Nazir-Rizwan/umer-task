@@ -45,7 +45,7 @@ export function GuestPosting() {
                 title="Guest Posting & Niche Edit Services"
                 subtitle="High-Quality Backlinks Across Multiple Niches"
                 description="At Link Harbor SEO, our Guest Posting & Niche Edit services are designed to help your website earn high-quality, authoritative backlinks that improve search engine rankings, referral traffic, and brand credibility. We work across a wide variety of industries and niches, helping businesses grow safely and sustainably."
-                gradient="from-purple-600 via-purple-700 to-pink-800"
+                variant="services"
             />
 
             {/* What is Guest Posting & Niche Edit */}

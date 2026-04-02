@@ -87,7 +87,7 @@ export function DigitalMarketing() {
                 title="Digital Marketing Services"
                 subtitle="Grow Your Brand, Increase Traffic & Boost Conversions"
                 description="At Link Harbor SEO, our Digital Marketing services are designed to help businesses expand their online presence, reach the right audience, and turn traffic into paying customers. We combine data-driven strategies, creativity, and technology to deliver measurable results for your business. Whether you are a startup, SME, or established brand, we create tailored campaigns that fit your goals and target audience."
-                gradient="from-pink-600 via-pink-700 to-red-800"
+                variant="services"
             />
 
             {/* What is Digital Marketing */}
