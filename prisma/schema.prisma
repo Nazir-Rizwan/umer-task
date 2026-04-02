@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "./generated/prisma"
@@ -13,10 +7,69 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+}
 
-model User {
-  id        Int     @id @default(autoincrement())
-  name      String
-  email     String  @unique
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  blogs     Blog[]
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+model Blog {
+  id              Int           @id @default(autoincrement())
+  title           String
+  slug            String        @unique
+  content         String?
+  coverImageUrl   String
+  metaTitle       String
+  metaDescription String?
+  readTimeMinutes Int           @default(0)
+  status          BlogStatus    @default(DRAFT)
+  publishedAt     DateTime?
+
+  adminId      Int
+  admin        Admin        @relation(fields: [adminId], references: [id])
+  blogKeywords BlogKeyword[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blogs")
+}
+
+model Keyword {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  blogKeywords BlogKeyword[]
+
+  createdAt DateTime @default(now())
+
+  @@map("keywords")
+}
+
+model BlogKeyword {
+  blogId    Int
+  keywordId Int
+
+  blog    Blog    @relation(fields: [blogId],    references: [id], onDelete: Cascade)
+  keyword Keyword @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+
+  @@id([blogId, keywordId])
+  @@map("blog_keywords")
 }
