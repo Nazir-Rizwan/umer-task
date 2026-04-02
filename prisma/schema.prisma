@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "./generated/prisma"
@@ -24,12 +18,12 @@ enum BlogStatus {
 }
 
 model Admin {
-  id       Int     @id @default(autoincrement())
-  name     String?
-  email    String  @unique
-  password String
-  role     Role    @default(ADMIN)
-  blogs    Blog[] // one admin can write many blogs
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String
+  role      Role     @default(ADMIN)
+  blogs     Blog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -38,44 +32,44 @@ model Admin {
 }
 
 model Blog {
-  id              Int        @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   title           String
-  slug            String     @unique // e.g. "my-first-blog-post"
-  excerpt         String
+  slug            String        @unique
   content         String?
-  coverImageUrl   String? // image URL
-  readTimeMinutes Int        @default(0)
-  status          BlogStatus @default(DRAFT)
-  publishedAt     DateTime? // set when status → PUBLISHED
+  coverImageUrl   String
+  metaTitle       String
+  metaDescription String?
+  readTimeMinutes Int           @default(0)
+  status          BlogStatus    @default(DRAFT)
+  publishedAt     DateTime?
 
-  adminId Int
-  admin   Admin @relation(fields: [adminId], references: [id])
+  adminId      Int
+  admin        Admin        @relation(fields: [adminId], references: [id])
+  blogKeywords BlogKeyword[]
 
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  blogCategories BlogCategory[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("blogs")
 }
 
-// ─── BlogCategory (join table) ───────────────────────────
+model Keyword {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  blogKeywords BlogKeyword[]
 
-model BlogCategory {
-  blogId     Int
-  categoryId Int
+  createdAt DateTime @default(now())
 
-  blog     Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@id([blogId, categoryId]) // composite PK — no duplicate pairs
-  @@map("blog_categories")
+  @@map("keywords")
 }
 
-model Category {
-  id        Int            @id @default(autoincrement())
-  name      String         @unique // "SEO", "Digital Marketing"
-  createdAt DateTime       @default(now())
-  blogs     BlogCategory[]
+model BlogKeyword {
+  blogId    Int
+  keywordId Int
 
-  @@map("categories")
+  blog    Blog    @relation(fields: [blogId],    references: [id], onDelete: Cascade)
+  keyword Keyword @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+
+  @@id([blogId, keywordId])
+  @@map("blog_keywords")
 }
