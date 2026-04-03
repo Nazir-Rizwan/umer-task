@@ -1,4 +1,12 @@
 import 'dotenv/config';
+import { setDefaultResultOrder } from 'dns';
+import { setDefaultAutoSelectFamily } from 'net';
+// Node v24 uses Happy Eyeballs v2: tries all DNS addresses (IPv4 + IPv6) at
+// once with only a 250 ms window. IPv6 is unreachable on this machine, and the
+// SSL handshake over IPv4 takes longer than 250 ms, so every connection dies
+// with ETIMEDOUT before finishing. Fix: prefer IPv4 DNS + disable the race.
+setDefaultResultOrder('ipv4first');
+setDefaultAutoSelectFamily(false);
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
@@ -17,7 +25,7 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ['http://localhost:3001'],
+    origin: ['http://localhost:3001', 'http://localhost:3002', 'https://umer-task-4gt5k8vy7-advisorengage-7010s-projects.vercel.app'],
     credentials: true, // allow cookies
   });
 
