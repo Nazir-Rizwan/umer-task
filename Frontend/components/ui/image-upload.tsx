@@ -3,7 +3,8 @@
 import { useRef, useState } from 'react';
 import { API } from '@/lib/api';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://localhost:3000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ;
+console.log("BACKEND_URL", BACKEND_URL);
 const MAX_SIZE_MB = 5;
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 
