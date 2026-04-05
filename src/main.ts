@@ -28,6 +28,7 @@ async function bootstrap() {
     origin: ['http://localhost:3001', 'http://localhost:3002', 'https://umer-task-4gt5k8vy7-advisorengage-7010s-projects.vercel.app',
 
       'https://umer-task.vercel.app',
+      'https://umer-task-git-build-ui-fixes-advisorengage-7010s-projects.vercel.app'
     ],
     credentials: true, // allow cookies
   });
