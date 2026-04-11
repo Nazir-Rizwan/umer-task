@@ -25,13 +25,12 @@ async function bootstrap() {
     }),
   );
 
+  // Allow all origins (reflect request origin). Keeps credentials enabled.
+  // This effectively accepts requests from any origin. If you prefer a
+  // restrictive policy later, we can switch to a whitelist or denylist.
   app.enableCors({
-    origin: ['http://localhost:3001', 'http://localhost:3002', 'https://umer-task-4gt5k8vy7-advisorengage-7010s-projects.vercel.app',
-
-      'https://umer-task.vercel.app',
-      'https://umer-task-git-build-ui-fixes-advisorengage-7010s-projects.vercel.app'
-    ],
-    credentials: true, // allow cookies
+    origin: true,
+    credentials: true,
   });
 
   const config = new DocumentBuilder()
