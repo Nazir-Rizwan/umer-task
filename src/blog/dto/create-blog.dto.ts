@@ -20,8 +20,9 @@ export class CreateBlogDto {
   @IsString()
   content?: string;
 
-  @IsUrl({ require_tld: false }, { message: 'coverImageUrl must be a valid URL' })
-  coverImageUrl: string;
+  // @IsUrl({ require_tld: false }, { message: 'coverImageUrl must be a valid URL' })
+  @IsOptional()
+  coverImageUrl?: string;
 
   @IsString()
   @MaxLength(70, { message: 'Meta title should not exceed 70 characters' })

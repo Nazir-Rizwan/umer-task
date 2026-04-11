@@ -27,6 +27,9 @@ const BLOG_SELECT = {
       keyword: { select: { id: true, name: true } },
     },
   },
+  images: {
+    select: { id: true, url: true, publicId: true, type: true },
+  },
 } satisfies Prisma.BlogSelect;
 
 @Injectable()

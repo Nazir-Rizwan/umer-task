@@ -11,6 +11,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { ValidationPipe } from '@nestjs/common';
+import { MulterExceptionFilter } from './common/filters/multer-exception.filter';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -38,9 +39,13 @@ async function bootstrap() {
     .setDescription('The cats API description')
     .setVersion('1.0')
     .addTag('cats')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
+
+  // global Multer error filter to return clear JSON for upload errors
+  app.useGlobalFilters(new MulterExceptionFilter());
 
 
   await app.listen(process.env.PORT ?? 3000);
