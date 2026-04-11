@@ -67,7 +67,7 @@ export default function NewBlogPage() {
             };
             if (form.coverImageUrl) body.coverImageUrl = form.coverImageUrl;
 
-            const created = await fetchApi(API.blog.create, { method: 'POST', token, body });
+            const created = await fetchApi<{ id: number }>(API.blog.create, { method: 'POST', token, body });
 
             // If user selected a file (deferred upload), upload it with blogId so DB record links to blog
             if (selectedFile) {
