@@ -75,7 +75,7 @@ export default function OffPageSEO() {
                 title="Off-Page SEO Services"
                 subtitle="Build Authority, Boost Rankings & Strengthen Your Online Presence"
                 description="At Link Harbor SEO, our Off-Page SEO services focus on improving your website's authority, trustworthiness, and visibility across the web. While On-Page SEO optimizes your website, Off-Page SEO ensures other websites and platforms recognize your brand as an authority, helping you climb search engine rankings faster. Off-Page SEO is the key to long-term, sustainable SEO growth and higher organic traffic."
-                gradient="from-indigo-600 via-indigo-700 to-purple-800"
+                variant="services"
             />
 
             {/* What is Off-Page SEO */}

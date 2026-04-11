@@ -69,7 +69,7 @@ export function LocalSEO() {
         title="Business Listing & GMB Optimization"
         subtitle="Improve Local Visibility, Attract Customers & Grow Your Business"
         description="At Link Harbor SEO, our Business Listing & Google My Business (GMB) services help businesses dominate local search results, attract more customers, and increase foot traffic. Whether you run a small local shop, a service-based business, or a growing company, local SEO ensures that your business is found when it matters most."
-        gradient="from-teal-600 via-teal-700 to-green-800"
+        variant="localSEO"
       />
 
       {/* What is Business Listing & GMB */}
