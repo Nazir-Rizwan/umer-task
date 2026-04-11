@@ -53,6 +53,7 @@ export default function BlogPage() {
         setLoading(true);
         try {
             const result = await fetchApi<PaginatedBlogs>(`${API.blog.published}?${buildQuery(p, l, s)}`);
+            console.log(result.data)
             setBlogs(result.data);
             setTotal(result.total);
             setTotalPages(result.totalPages);
