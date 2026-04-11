@@ -8,6 +8,7 @@ import { AdminModule } from './admin/admin.module';
 import { BlogModule } from './blog/blog.module';
 import { KeywordModule } from './keyword/keyword.module';
 import { UploadModule } from './upload/upload.module';
+import { CloudinaryModule } from './upload/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UploadModule } from './upload/upload.module';
     BlogModule,
     KeywordModule,
     UploadModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

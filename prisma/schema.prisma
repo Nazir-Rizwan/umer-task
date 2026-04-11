@@ -18,12 +18,12 @@ enum BlogStatus {
 }
 
 model Admin {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  email     String   @unique
-  password  String
-  role      Role     @default(ADMIN)
-  blogs     Blog[]
+  id       Int     @id @default(autoincrement())
+  name     String?
+  email    String  @unique
+  password String
+  role     Role    @default(ADMIN)
+  blogs    Blog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -32,19 +32,20 @@ model Admin {
 }
 
 model Blog {
-  id              Int           @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
   title           String
-  slug            String        @unique
+  slug            String     @unique
   content         String?
-  coverImageUrl   String
+  coverImageUrl   String?
+  images          Image[]
   metaTitle       String
   metaDescription String?
-  readTimeMinutes Int           @default(0)
-  status          BlogStatus    @default(DRAFT)
+  readTimeMinutes Int        @default(0)
+  status          BlogStatus @default(DRAFT)
   publishedAt     DateTime?
 
   adminId      Int
-  admin        Admin        @relation(fields: [adminId], references: [id])
+  admin        Admin         @relation(fields: [adminId], references: [id])
   blogKeywords BlogKeyword[]
 
   createdAt DateTime @default(now())
@@ -67,9 +68,23 @@ model BlogKeyword {
   blogId    Int
   keywordId Int
 
-  blog    Blog    @relation(fields: [blogId],    references: [id], onDelete: Cascade)
+  blog    Blog    @relation(fields: [blogId], references: [id], onDelete: Cascade)
   keyword Keyword @relation(fields: [keywordId], references: [id], onDelete: Cascade)
 
   @@id([blogId, keywordId])
   @@map("blog_keywords")
+}
+
+model Image {
+  id       Int     @id @default(autoincrement())
+  url      String
+  publicId String
+  type     String? // e.g. "cover", "inline"
+  blogId   Int?
+  blog     Blog?   @relation(fields: [blogId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("images")
 }
