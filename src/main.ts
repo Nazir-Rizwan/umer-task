@@ -25,11 +25,28 @@ async function bootstrap() {
     }),
   );
 
-  // Allow all origins (reflect request origin). Keeps credentials enabled.
-  // This effectively accepts requests from any origin. If you prefer a
-  // restrictive policy later, we can switch to a whitelist or denylist.
+  // Allow localhost dev ports and Vercel deployments whose hostnames
+  // start with `umer-task` and end with `.vercel.app`.
+  // Note: CORS checks only the origin (scheme + host + port). Paths
+  // such as `/blog` are NOT part of the origin and cannot be used here.
+  const allowedExact = new Set([
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'https://umer-task.vercel.app',
+  ]);
+
+  // Matches origins like:
+  // https://umer-task-6f0tfrw1c-advisorengage-7010s-projects.vercel.app
+  // and also https://umer-task-some-other.vercel.app
+  const vercelRegex = /^https:\/\/umer-task[0-9A-Za-z-_.-]*\.vercel\.app$/i;
+
   app.enableCors({
-    origin: true,
+    origin: (origin, callback) => {
+      // If no origin (server-to-server, curl, same-origin), allow
+      if (!origin) return callback(null, true);
+      if (allowedExact.has(origin) || vercelRegex.test(origin)) return callback(null, true);
+      return callback(new Error('Origin not allowed by CORS'), false);
+    },
     credentials: true,
   });
 
