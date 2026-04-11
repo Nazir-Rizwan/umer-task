@@ -1,6 +1,5 @@
 import React from 'react'
-import Anchor from 'lucide-react/dist/esm/icons/anchor';
-import { Target, TrendingUp, Users, BarChart, Award } from 'lucide-react';
+import { Anchor, Target, TrendingUp, Users, BarChart, Award } from 'lucide-react';
 import { CheckCircle, Search, Link2, FileText, Globe, MapPin } from 'lucide-react';
 import { Rocket, BarChart3 } from 'lucide-react';
 import { WhyChooseUs } from '@/components/WhyChooseUs';

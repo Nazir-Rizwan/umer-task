@@ -30,6 +30,7 @@ export default function NewBlogPage() {
     const [form, setForm] = useState<BlogForm>(EMPTY);
     const [submitting, setSubmitting] = useState(false);
     const [errors, setErrors] = useState<Partial<Record<keyof BlogForm, string>>>({});
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [apiError, setApiError] = useState('');
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') ?? '' : '';
@@ -40,7 +41,7 @@ export default function NewBlogPage() {
     const validate = (): boolean => {
         const errs: Partial<Record<keyof BlogForm, string>> = {};
         if (!form.title.trim()) errs.title = 'Title is required';
-        if (!form.coverImageUrl) errs.coverImageUrl = 'Cover image is required';
+        if (!form.coverImageUrl && !selectedFile) errs.coverImageUrl = 'Cover image is required';
         if (!form.content.trim()) errs.content = 'Content is required';
         if (form.keywordIds.length === 0) errs.keywordIds = 'At least one keyword is required';
         if (!form.metaTitle.trim()) errs.metaTitle = 'Meta title is required';
@@ -54,19 +55,40 @@ export default function NewBlogPage() {
         setApiError('');
         setSubmitting(true);
         try {
-            await fetchApi(API.blog.create, {
-                method: 'POST', token,
-                body: {
-                    title: form.title.trim(),
-                    content: form.content.trim(),
-                    coverImageUrl: form.coverImageUrl,
-                    keywordIds: form.keywordIds,
-                    readTimeMinutes: parseInt(form.readTimeMinutes) || 0,
-                    metaTitle: form.metaTitle.trim(),
-                    metaDescription: form.metaDescription.trim(),
-                    status,
-                },
-            });
+            // Create blog first
+            const body: any = {
+                title: form.title.trim(),
+                content: form.content.trim(),
+                keywordIds: form.keywordIds,
+                readTimeMinutes: parseInt(form.readTimeMinutes) || 0,
+                metaTitle: form.metaTitle.trim(),
+                metaDescription: form.metaDescription.trim(),
+                status,
+            };
+            if (form.coverImageUrl) body.coverImageUrl = form.coverImageUrl;
+
+            const created = await fetchApi(API.blog.create, { method: 'POST', token, body });
+
+            // If user selected a file (deferred upload), upload it with blogId so DB record links to blog
+            if (selectedFile) {
+                try {
+                    const formData = new FormData();
+                    formData.append('file', selectedFile);
+                    formData.append('blogId', String(created.id));
+
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL ?? ''}${API.upload.image}`, {
+                        method: 'POST',
+                        headers: { Authorization: `Bearer ${token}` },
+                        body: formData,
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.message ?? 'Upload failed');
+                } catch (err) {
+                    // image upload failed — show message but do not block blog creation
+                    setApiError(err instanceof Error ? err.message : 'Image upload failed');
+                }
+            }
+
             router.push('/admin/dashboard');
         } catch (err) {
             setApiError(err instanceof Error ? err.message : 'Failed to create post');
@@ -110,7 +132,9 @@ export default function NewBlogPage() {
                         error={errors.coverImageUrl}>
                         <ImageUpload value={form.coverImageUrl}
                             onChange={url => setForm(p => ({ ...p, coverImageUrl: url }))}
-                            token={token} />
+                            token={token}
+                            uploadImmediately={false}
+                            onFileSelected={file => setSelectedFile(file)} />
                     </Field>
 
                     {/* Content */}

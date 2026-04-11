@@ -7,21 +7,22 @@ export const API = {
     login: '/auth/login',
   },
   blog: {
-    published:  '/blog/published',
-    bySlug:     (slug: string) => `/blog/slug/${slug}`,
-    list:       '/blog',
-    stats:      '/blog/stats',
-    create:     '/blog',
-    single:     (id: number) => `/blog/${id}`,
-    update:     (id: number) => `/blog/${id}`,
-    delete:     (id: number) => `/blog/${id}`,
+    published: '/blog/published',
+    bySlug: (slug: string) => `/blog/slug/${slug}`,
+    list: '/blog',
+    stats: '/blog/stats',
+    create: '/blog',
+    single: (id: number) => `/blog/${id}`,
+    update: (id: number) => `/blog/${id}`,
+    delete: (id: number) => `/blog/${id}`,
   },
   keyword: {
-    list:   '/keyword',
+    list: '/keyword',
     create: '/keyword',
     delete: (id: number) => `/keyword/${id}`,
   },
   upload: {
-    image: '/upload/image',
+    // point to Cloudinary-backed upload endpoint
+    image: '/upload/cloudinary/image',
   },
 } as const;
