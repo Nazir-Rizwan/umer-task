@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { API } from '@/lib/api';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 console.log("BACKEND_URL", BACKEND_URL);
 const MAX_SIZE_MB = 5;
 const ACCEPTED = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
@@ -14,7 +14,14 @@ interface ImageUploadProps {
   token: string;
 }
 
-export function ImageUpload({ value, onChange, token }: ImageUploadProps) {
+interface InternalImageUploadProps extends ImageUploadProps {
+  // when false, component will not upload automatically — parent will handle upload
+  uploadImmediately?: boolean;
+  // notify parent of selected file when uploadImmediately=false
+  onFileSelected?: (file: File | null) => void;
+}
+
+export function ImageUpload({ value, onChange, token, uploadImmediately = true, onFileSelected }: InternalImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
@@ -34,6 +41,12 @@ export function ImageUpload({ value, onChange, token }: ImageUploadProps) {
     // Local preview before upload
     const objectUrl = URL.createObjectURL(file);
     setPreview(objectUrl);
+    // If parent wants to handle upload (create blog first), just notify parent with file
+    if (!uploadImmediately) {
+      onFileSelected?.(file);
+      // keep local preview, don't upload
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', file);
